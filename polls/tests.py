@@ -34,3 +34,12 @@ class TestPoll(APITestCase):
         self.client.login(username="test", password="test")
         response = self.client.get(self.uri)
         self.assertEqual(response.status_code, 200, 'Expected code: 200 received {0} instead.'.format(response.status_code))
+
+    def test_create(self):
+        self.client.login(username="test", password="test")
+        params = {
+            'question': 'American football or rugby',
+            'created_by': 1
+        }
+        response = self.client.post(self.uri, params)
+        self.assertEqual(response.status_code, 201, 'Expected code 201, received {0} instead'.format(response.status_code))
